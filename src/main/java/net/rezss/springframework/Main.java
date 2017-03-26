@@ -1,15 +1,16 @@
 package net.rezss.springframework;
 
-import net.rezss.springframework.model.Auto;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import net.rezss.springframework.scan.HelloWorldPrinter;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.support.AbstractApplicationContext;
 
 public class Main
 {
   public static void main(String[] args)
   {
-    final ApplicationContext context = new ClassPathXmlApplicationContext("di-config.xml");
-    final Auto a3 = (Auto) context.getBean("A3");
-    System.out.println(a3);
+    final AbstractApplicationContext context = new AnnotationConfigApplicationContext(SpringConfiguration.class);
+    final HelloWorldPrinter printer = (HelloWorldPrinter) context.getBean("helloWorldPrinter");
+    printer.print();
+    context.registerShutdownHook();
   }
 }
