@@ -5,13 +5,5 @@
        xmlns:aop="http://www.springframework.org/schema/aop"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
     <context:component-scan base-package="net.rezss.springframework" />
-    <aop:aspectj-autoproxy />
-
-    <bean id="xmlAspect" class="net.rezss.springframework.xml.SampleXMLAspect" />
-
-    <aop:config>
-        <aop:aspect ref="xmlAspect">
-            <aop:before method="logMessage" pointcut="execution(* net.rezss..*.Car.drive(..))" />
-        </aop:aspect>
-    </aop:config>
+    <aop:aspectj-autoproxy proxy-target-class="true"/>
 </beans>
