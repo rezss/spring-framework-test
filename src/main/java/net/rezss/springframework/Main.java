@@ -1,7 +1,7 @@
 package net.rezss.springframework;
 
+import net.rezss.springframework.example.BankAccount;
 import net.rezss.springframework.example.HelloWorldService;
-import net.rezss.springframework.introduction.ProxyInterface;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -12,8 +12,10 @@ public class Main
     final ApplicationContext context = new ClassPathXmlApplicationContext("aop-config.xml");
     final HelloWorldService helloWorldService = (HelloWorldService) context.getBean("helloWorldService");
 
-    System.out.println(helloWorldService.getMessage());
-    System.out.println(helloWorldService.getBaseMessage());
-    System.out.println(((ProxyInterface) helloWorldService).getProxyMessage());
+    final BankAccount bankAccount = (BankAccount) context.getBean("bankAccount");
+    bankAccount.setAccountID(4);
+    bankAccount.insertMoney(200);
+
+    helloWorldService.getMessage();
   }
 }
